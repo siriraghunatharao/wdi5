@@ -38,5 +38,5 @@ jobs:
         with:
           name: report
           path: |
-            ./wdi5/target/timeline-desktop.html
+            ./target/timeline-desktop.html
           retention-days: 5
