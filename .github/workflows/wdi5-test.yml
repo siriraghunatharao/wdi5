@@ -1,0 +1,42 @@
+name: run wdi5 tests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: check out repo
+        uses: actions/checkout@v3
+
+      - name: setup chrome
+        uses: browser-actions/setup-chrome@v119.0.0
+
+      - name: use node ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: install packages
+        run: npm install
+
+      - name: run wdi5 desktop tests
+        run: npm run test
+
+
+      - name: Upload Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: report
+          path: |
+            ./wdi5/target/timeline-desktop.html
+          retention-days: 5
