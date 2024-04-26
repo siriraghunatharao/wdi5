@@ -17,7 +17,7 @@ exports.config = {
         acceptInsecureCerts: true,
         'goog:chromeOptions': {
             args: [
-                // '--headless',
+                '--headless',
                 '--no-sandbox',
                 '--disable-dev-shm-usage', 
                 '--disable-gpu',
